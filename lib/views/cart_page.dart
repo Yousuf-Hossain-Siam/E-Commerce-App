@@ -15,8 +15,20 @@ class CartPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Shopping Cart'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => context.go('/'), // Navigate back to home page
+        ),
+        title: const Text(
+          'Shopping Cart',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.black87,
       ),
       body: cartItemsAsync.when(
         data: (cartItems) {
@@ -84,7 +96,7 @@ class CartPage extends ConsumerWidget {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.grey[100],
+                  color: const Color.fromARGB(255, 225, 228, 230),
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(16),
                   ),
@@ -96,7 +108,7 @@ class CartPage extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Total:',
+                            'Total Amount:',
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                           Text(
@@ -119,12 +131,20 @@ class CartPage extends ConsumerWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: cartItems.isNotEmpty
-                            ? () => context.go('/checkout')
+                            ? () => context.push('/checkout')
                             : null,
                         style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black87,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
-                        child: const Text('Proceed to Checkout'),
+                        child: const Text(
+                          'Proceed to Checkout',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -183,6 +203,7 @@ class CartItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: const Color.fromARGB(255, 225, 228, 230),
       margin: const EdgeInsets.only(bottom: 16),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -193,9 +214,9 @@ class CartItemCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               child: Image.network(
                 cartItem.product.image,
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
+                width: 90,
+                height: 100,
+                fit: BoxFit.contain,
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
                     width: 80,
@@ -255,7 +276,7 @@ class CartItemCard extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
+                                horizontal: 2,
                               ),
                               child: Text(
                                 cartItem.quantity.toString(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../providers/product_providers.dart';
 import '../model/product_model.dart';
 
@@ -14,8 +15,21 @@ class ProductDetailPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Details'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+     
+              onPressed: () => context.pop(), // or context.pop() if using GoRouter
+        ),
+        title: const Text(
+          'Product Details',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.black87,
       ),
       body: productsAsync.when(
         data: (products) {
