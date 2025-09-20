@@ -35,10 +35,10 @@ class ProductCard extends StatelessWidget {
                     decoration: BoxDecoration(color: Colors.grey[100]),
                     child: Image.network(
                       product.image,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
-                          color: Colors.grey[200],
+                          color: Colors.cyanAccent,
                           child: const Icon(
                             Icons.image_not_supported,
                             size: 50,
@@ -95,8 +95,8 @@ class ProductCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // Product title
-                    Flexible(
-                      flex: 2,
+                    SizedBox(
+                      height: 30, // Fixed height to ensure consistent alignment
                       child: Text(
                         product.title,
                         maxLines: 2,
@@ -139,7 +139,7 @@ class ProductCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 2),
+                    const SizedBox(height: 15),
                     // Add to cart button
                     Flexible(
                       child: SizedBox(
@@ -147,12 +147,13 @@ class ProductCard extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: onAddToCart,
                           style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            backgroundColor: Colors.lightGreen,
+                            padding: const EdgeInsets.symmetric(),
                             minimumSize: const Size(0, 28),
                           ),
                           child: const Text(
                             'Add to Cart',
-                            style: TextStyle(fontSize: 9),
+                            style: TextStyle(fontSize: 12, color: Colors.white),
                           ),
                         ),
                       ),

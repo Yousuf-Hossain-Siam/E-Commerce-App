@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/product_providers.dart';
 
-
 class CheckoutPage extends ConsumerStatefulWidget {
   const CheckoutPage({super.key});
 
@@ -33,8 +32,20 @@ class _CheckoutPageState extends ConsumerState<CheckoutPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Checkout'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => context.go('/cart'), // Navigate back to cart page
+        ),
+        title: const Text(
+          'Checkout',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.black87,
       ),
       body: Form(
         key: _formKey,
@@ -199,9 +210,17 @@ class _CheckoutPageState extends ConsumerState<CheckoutPage> {
                 child: ElevatedButton(
                   onPressed: _placeOrder,
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black87,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text('Place Order'),
+                  child: const Text(
+                    'Place Order',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ),

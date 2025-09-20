@@ -47,9 +47,17 @@ class SuccessPage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () => context.go('/'),
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black87,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text('Continue Shopping'),
+                  child: const Text(
+                    'Continue Shopping',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 16),

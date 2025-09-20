@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'data/storage_service.dart';
 import 'data/datasources/local_datasource.dart';
 import 'providers/repository_providers.dart';
-import 'views/product_list_page.dart';
-import 'views/product_detail_page.dart';
-import 'views/cart_page.dart';
-import 'views/checkout_page.dart';
-import 'views/success_page.dart';
+import 'routes/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,30 +27,11 @@ class MyApp extends ConsumerWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,
         ),
-        routerConfig: _router,
+        routerConfig: AppRouter.router,
       ),
     );
   }
 }
-
-final _router = GoRouter(
-  routes: [
-    GoRoute(path: '/', builder: (context, state) => const ProductListPage()),
-    GoRoute(
-      path: '/product/:id',
-      builder: (context, state) {
-        final productId = state.pathParameters['id']!;
-        return ProductDetailPage(productId: productId);
-      },
-    ),
-    GoRoute(path: '/cart', builder: (context, state) => const CartPage()),
-    GoRoute(
-      path: '/checkout',
-      builder: (context, state) => const CheckoutPage(),
-    ),
-    GoRoute(path: '/success', builder: (context, state) => const SuccessPage()),
-  ],
-);
 
 // Initialize local data source on app startup
 class _AppInitializer extends ConsumerWidget {

@@ -16,15 +16,23 @@ class ProductListPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Products'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text(
+          'Daily Shopping',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.black87,
         actions: [
           // Cart icon with badge
           cartItemCount.when(
             data: (count) => Stack(
               children: [
                 IconButton(
-                  icon: const Icon(Icons.shopping_cart),
+                  icon: const Icon(Icons.shopping_cart, color: Colors.white),
                   onPressed: () => context.go('/cart'),
                 ),
                 if (count > 0)
@@ -55,12 +63,12 @@ class ProductListPage extends ConsumerWidget {
             ),
             loading: () => IconButton(
               icon: const Icon(Icons.shopping_cart),
-              onPressed: () => context.go('/cart'),
+              onPressed: () => context.push('/cart'),
             ),
             // ignore: unnecessary_underscores
             error: (_, __) => IconButton(
               icon: const Icon(Icons.shopping_cart),
-              onPressed: () => context.go('/cart'),
+              onPressed: () => context.push('/cart'),
             ),
           ),
         ],
@@ -110,7 +118,7 @@ class ProductListPage extends ConsumerWidget {
                       final product = products[index];
                       return ProductCard(
                         product: product,
-                        onTap: () => context.go('/product/${product.id}'),
+                        onTap: () => context.push('/product/${product.id}'),
                         onFavoriteToggle: () {
                           ProductActions.toggleFavorite(ref, product.id);
                         },
